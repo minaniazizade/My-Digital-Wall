@@ -1,0 +1,828 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Royal Certificate Wall</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+:root{
+  --gold:#d6ad59;
+  --light-gold:#f8e4a7;
+  --red:#590b15;
+  --dark-red:#30050b;
+  --black:#100b0c;
+  --cream:#f7edda;
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  color:var(--cream);
+  background:#17090b;
+  font-family:'Playfair Display',Georgia,serif;
+}
+
+header{
+  height:76px;
+  padding:0 5%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  background:linear-gradient(90deg,#100c0c,#1a1111,#0d0b0b);
+  border-bottom:2px solid #a77b31;
+  box-shadow:0 5px 25px #0009;
+  position:relative;
+  z-index:5;
+}
+
+.logo{
+  font-family:'Cinzel',serif;
+  font-size:clamp(15px,2vw,24px);
+  color:var(--light-gold);
+  white-space:nowrap;
+}
+
+.logo span{color:var(--gold);margin-right:8px}
+
+nav{display:flex;gap:clamp(10px,3vw,35px)}
+
+nav a{
+  text-decoration:none;
+  color:#f4dfb0;
+  font-size:14px;
+  transition:.25s;
+}
+
+nav a:hover{color:white}
+
+.hero{
+  text-align:center;
+  padding:35px 15px 24px;
+  background:
+    radial-gradient(ellipse at 50% 0%,#a31e28 0%,transparent 65%);
+}
+
+.crown{
+  font-size:32px;
+  color:var(--gold);
+  text-shadow:0 0 20px #e8b74e77;
+}
+
+.hero h1{
+  font-family:'Cinzel',serif;
+  font-size:clamp(26px,4vw,45px);
+  font-weight:500;
+  color:var(--light-gold);
+  margin:8px 0 12px;
+  text-shadow:0 3px 12px #0008;
+}
+
+.ornament{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  color:var(--gold);
+  margin:0 auto 12px;
+}
+
+.ornament:before,.ornament:after{
+  content:"";
+  width:70px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold));
+}
+
+.ornament:after{
+  transform:rotate(180deg);
+}
+
+.hero p{
+  color:#ead7b0;
+  font-size:15px;
+  line-height:1.8;
+  margin:0;
+}
+
+.wall{
+  position:relative;
+  margin:0 2%;
+  padding:24px clamp(15px,4vw,65px) 35px;
+  border:5px double #a87931;
+  outline:1px solid #f0d18b55;
+  outline-offset:-13px;
+  background-color:#580b14;
+  background-image:
+    radial-gradient(ellipse at 50% 0%,#a51c2a66,transparent 65%),
+    repeating-linear-gradient(45deg,#ffffff03 0px,#ffffff03 1px,transparent 1px,transparent 5px),
+    linear-gradient(90deg,#36060b,#70101a 18%,#4e0811 50%,#70101a 82%,#35050a);
+  box-shadow:inset 0 0 65px #160206aa,0 10px 30px #0008;
+}
+
+.wall:before{
+  content:"";
+  position:absolute;
+  inset:7px;
+  border:1px solid #d3a64d66;
+  pointer-events:none;
+}
+
+.wall:after{
+  content:"";
+  position:absolute;
+  height:12px;
+  bottom:-17px;
+  left:-5px;
+  right:-5px;
+  background:linear-gradient(#d2a75c,#593411,#170c08);
+  box-shadow:0 8px 20px #000a;
+}
+
+.controls{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
+  margin:0 auto 32px;
+  position:relative;
+  z-index:1;
+}
+
+.controls input,.controls select{
+  background:#1b1010e8;
+  border:1px solid #c49b4c;
+  border-radius:4px;
+  padding:12px 16px;
+  color:#f5e2b8;
+  font-family:inherit;
+  font-size:14px;
+  outline:none;
+}
+
+.controls input{
+  width:min(320px,100%);
+}
+
+.controls select{min-width:190px}
+
+.controls option{
+  background:#210b0d;
+  color:#f5e2b8;
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:45px 25px;
+  max-width:1450px;
+  margin:0 auto;
+  position:relative;
+  z-index:1;
+}
+
+.certificate{
+  min-width:0;
+  text-align:center;
+  cursor:pointer;
+  animation:appear .6s ease both;
+}
+
+@keyframes appear{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Royal carved gold frame */
+
+.frame{
+  position:relative;
+  padding:10px;
+  background:
+    linear-gradient(135deg,#75430d,#f5d67a 12%,#9b651d 23%,
+    #ffe8a0 34%,#8b5718 48%,#f5d477 62%,#805016 76%,#f8df8b 90%,#70400c);
+  border:2px solid #f1d58b;
+  box-shadow:
+    0 0 0 3px #43200b,
+    0 0 0 5px #c39443,
+    0 12px 22px #000b,
+    inset 0 0 8px #fff4bd;
+  transition:transform .3s,box-shadow .3s;
+}
+
+.frame:before{
+  content:"❦";
+  position:absolute;
+  z-index:2;
+  top:-24px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#f5d57e;
+  font-size:30px;
+  line-height:1;
+  text-shadow:0 2px 3px #3a1804;
+}
+
+.frame:after{
+  content:"❧                         ❧";
+  white-space:pre;
+  position:absolute;
+  left:0;
+  right:0;
+  top:-12px;
+  color:#e8c16c;
+  font-size:15px;
+  pointer-events:none;
+}
+
+.certificate:hover .frame{
+  transform:translateY(-7px) scale(1.025);
+  box-shadow:
+    0 0 0 3px #43200b,
+    0 0 0 5px #e9c36e,
+    0 0 25px #e7bd5d77,
+    0 20px 30px #000c;
+}
+
+.paper{
+  aspect-ratio:1.38;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#f6eedf;
+  border:2px solid #8d6b36;
+  outline:1px solid #d6bb82;
+  outline-offset:-6px;
+}
+
+.paper img{
+  position:relative;
+  z-index:1;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#f6eedf;
+}
+
+.placeholder{
+  width:100%;
+  height:100%;
+  padding:15px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:#332316;
+  background:
+    linear-gradient(#f6eedfdd,#f6eedfdd),
+    repeating-linear-gradient(45deg,#bda16b 0 1px,transparent 1px 5px);
+}
+
+.placeholder .mini-crown{
+  font-size:26px;
+  color:#ad7a27;
+}
+
+.placeholder small{
+  font-family:'Cinzel',serif;
+  font-size:8px;
+  letter-spacing:2px;
+  margin:7px 0;
+}
+
+.placeholder strong{
+  font-size:clamp(11px,1.3vw,17px);
+  line-height:1.5;
+}
+
+.placeholder span{
+  font-size:10px;
+  margin-top:7px;
+}
+
+.plaque{
+  margin:13px 3px 0;
+  padding:12px 8px;
+  background:linear-gradient(135deg,#17100d,#251817,#120d0b);
+  border:1px solid #b38a42;
+  outline:1px solid #64451f;
+  outline-offset:3px;
+  box-shadow:0 7px 12px #0008;
+  min-height:94px;
+}
+
+.plaque h3{
+  font-size:15px;
+  font-weight:500;
+  color:#f4d99b;
+  margin:0 0 7px;
+  line-height:1.45;
+}
+
+.plaque p{
+  color:#d1c2aa;
+  font-size:12px;
+  margin:5px 0;
+}
+
+.badge{
+  display:inline-block;
+  margin-top:6px;
+  padding:4px 12px;
+  border:1px solid #967038;
+  border-radius:20px;
+  color:#efd08b;
+  font-size:10px;
+}
+
+.empty{
+  grid-column:1/-1;
+  text-align:center;
+  color:#f5dfac;
+  padding:40px 10px;
+}
+
+footer{
+  text-align:center;
+  padding:36px 15px 25px;
+  color:#b99b67;
+  font-family:'Cinzel',serif;
+  font-size:11px;
+  letter-spacing:2px;
+}
+
+/* Large certificate preview */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:20;
+  padding:20px;
+  align-items:center;
+  justify-content:center;
+  background:#080405ed;
+  backdrop-filter:blur(5px);
+}
+
+.modal.open{display:flex}
+
+.modal-box{
+  width:min(950px,100%);
+  max-height:94vh;
+  overflow:auto;
+  padding:20px;
+  border:3px double #d0a34f;
+  background:linear-gradient(145deg,#39070d,#160b0c);
+  box-shadow:0 0 45px #d4a44c22;
+  text-align:center;
+}
+
+.modal-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:18px;
+}
+
+.modal-top h2{
+  color:#f4d99b;
+  font-size:19px;
+  font-weight:500;
+}
+
+.close{
+  padding:9px 14px;
+  color:#1c0b08;
+  background:linear-gradient(135deg,#f9e4a1,#bc8733);
+  border:0;
+  cursor:pointer;
+  font-family:inherit;
+}
+
+#largeImage{
+  display:block;
+  width:100%;
+  max-height:68vh;
+  object-fit:contain;
+  background:#f7f0e3;
+}
+
+#modalText{
+  color:#e5cf9e;
+  line-height:1.8;
+}
+
+.verify{
+  display:inline-block;
+  color:#f7d78b;
+  margin:10px;
+}
+
+[hidden]{display:none!important}
+
+@media(max-width:1000px){
+  .gallery{grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 20px}
+}
+
+@media(max-width:650px){
+  header{height:auto;min-height:70px;padding:15px 4%;flex-wrap:wrap}
+  nav{gap:16px}
+  nav a{font-size:12px}
+  .logo{font-size:15px}
+  .hero{padding-top:28px}
+  .wall{margin:0 10px;padding:25px 15px 30px}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:38px 16px}
+  .frame{padding:6px}
+  .plaque{padding:10px 5px;min-height:95px}
+  .plaque h3{font-size:12px}
+  .plaque p{font-size:10px}
+  .badge{font-size:9px;padding:4px 7px}
+  .controls{margin-bottom:28px}
+  .controls input,.controls select{width:100%;min-width:0}
+}
+
+@media(max-width:370px){
+  .gallery{grid-template-columns:1fr}
+  .frame{padding:10px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo"><span>♛</span> My Certificate Wall</div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#gallery">Certificates</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="crown">♛</div>
+  <div class="ornament">✦</div>
+  <h1>My Achievements</h1>
+  <div class="ornament">❧</div>
+  <p>A collection of my certificates and learning journey</p>
+</section>
+
+<main class="wall" id="gallery">
+
+  <div class="controls">
+    <input id="search" type="search"
+      placeholder="⌕  Search certificates..."
+      aria-label="Search certificates">
+
+    <select id="filter" aria-label="Filter category">
+      <option value="">All Categories</option>
+      <option value="Programming">Programming</option>
+      <option value="Data Science">Data Science</option>
+      <option value="Web Development">Web Development</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
+
+  <section class="gallery" id="galleryItems"></section>
+
+</main>
+
+<footer id="about">
+  ♛ &nbsp; KNOWLEDGE IS THE ROYAL TREASURE &nbsp; ♛
+  <p id="count" style="letter-spacing:0;font-family:Georgia,serif"></p>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true"
+     aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <div class="modal-top">
+      <h2 id="modalTitle">Certificate</h2>
+      <button class="close" id="closeModal">✕ Close</button>
+    </div>
+
+    <img id="largeImage" alt="Certificate preview" hidden>
+    <p id="modalText"></p>
+    <a id="verifyLink" class="verify" target="_blank"
+       rel="noopener noreferrer" hidden>
+       Verify Certificate ↗
+    </a>
+  </div>
+</div>
+
+<script>
+
+const certificates = [
+  {
+    category: "Programming",
+    image: "Certificates/12.png",
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Certificate.jpg",
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Mina Niazizadeh - Intermediate Machine Learning.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/16.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/11.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/13.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/14.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/15.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/10.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/9.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/8.jpg"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/7.jpg"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/6.jpg"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/4.jpeg"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/1.jpeg"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/2.jpeg"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/3.jpeg"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/5.jpg"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Code Forker.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Dataset Creator.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Dataset Tagger.png"
+  },
+  {
+    category: "English",
+    image: "Certificates/EF SET Certificate.jpg"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Graduate.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Kaggle Community Member.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Learner.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Linked Dataset Creator (1).png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Mina Niazizadeh - Advanced SQL.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Mina Niazizadeh - Data Cleaning.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Mina Niazizadeh - Data Visualization.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Mina Niazizadeh - Feature Engineering.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Mina Niazizadeh - Geospatial Analysis.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Mina Niazizadeh - Intermediate Machine Learning.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Mina Niazizadeh - Intro to Deep Learning.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Mina Niazizadeh - Intro to Machine Learning.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Mina Niazizadeh - Intro to Programming.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Mina Niazizadeh - Intro to SQL.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Mina Niazizadeh - Pandas.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Mina Niazizadeh - Python.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Python Coder.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Python Developer_certificate.jpg"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Student.png"
+  },
+  {
+    category: "Programming",
+    image: "Certificates/Vampire.png"
+  },
+
+];
+
+const gallery = document.getElementById("galleryItems");
+const search = document.getElementById("search");
+const filter = document.getElementById("filter");
+const modal = document.getElementById("modal");
+
+function makeElement(tag, className, text){
+  const el = document.createElement(tag);
+  if(className) el.className = className;
+  if(text !== undefined) el.textContent = text;
+  return el;
+}
+
+function createPlaceholder(cert){
+  const paper = makeElement("div","placeholder");
+  paper.append(makeElement("div","mini-crown","♛"));
+  paper.append(makeElement("small","","CERTIFICATE OF ACHIEVEMENT"));
+  paper.append(makeElement("strong","",cert.title));
+  paper.append(makeElement("span","",cert.issuer));
+  return paper;
+}
+
+function showCertificates(){
+  gallery.replaceChildren();
+
+  const query = search.value.toLowerCase().trim();
+  const category = filter.value;
+
+  const results = certificates.filter(cert =>
+    (cert.title+" "+cert.issuer+" "+cert.category)
+      .toLowerCase().includes(query) &&
+    (!category || cert.category === category)
+  );
+
+  document.getElementById("count").textContent =
+    results.length + " certificates in the collection";
+
+  if(results.length === 0){
+    gallery.append(makeElement("p","empty","No certificates found."));
+    return;
+  }
+
+  results.forEach(cert => {
+    const item = makeElement("article","certificate");
+    item.tabIndex = 0;
+    item.setAttribute("role","button");
+    item.setAttribute("aria-label","View "+cert.title);
+
+    const frame = makeElement("div","frame");
+    const paper = makeElement("div","paper");
+
+    if(cert.image){
+      const img = document.createElement("img");
+      img.src = cert.image;
+      img.alt = cert.title;
+
+      img.onerror = () => {
+        img.remove();
+        if(!paper.querySelector(".placeholder")){
+          paper.append(createPlaceholder(cert));
+        }
+      };
+
+      paper.append(img);
+    }else{
+      paper.append(createPlaceholder(cert));
+    }
+
+    frame.append(paper);
+
+    const plaque = makeElement("div","plaque");
+    plaque.append(makeElement("h3","",cert.title));
+    plaque.append(makeElement("p","",cert.issuer+"  ·  "+cert.date));
+    plaque.append(makeElement("span","badge",cert.category));
+
+    item.append(frame,plaque);
+
+    item.addEventListener("click",()=>openCertificate(cert));
+    item.addEventListener("keydown",event=>{
+      if(event.key==="Enter" || event.key===" "){
+        event.preventDefault();
+        openCertificate(cert);
+      }
+    });
+
+    gallery.append(item);
+  });
+}
+
+function openCertificate(cert){
+  document.getElementById("modalTitle").textContent = cert.title;
+  document.getElementById("modalText").textContent =
+    cert.issuer+" · "+cert.date+" · "+cert.category;
+
+  const img = document.getElementById("largeImage");
+  img.hidden = true;
+  img.removeAttribute("src");
+  img.onerror = () => { img.hidden = true; };
+  img.onload = () => { img.hidden = false; };
+
+  if(cert.image) img.src = cert.image;
+
+  const link = document.getElementById("verifyLink");
+  link.hidden = !cert.link;
+  if(cert.link) link.href = cert.link;
+
+  modal.classList.add("open");
+  document.getElementById("closeModal").focus();
+}
+
+function closeModal(){
+  modal.classList.remove("open");
+}
+
+document.getElementById("closeModal").addEventListener("click",closeModal);
+
+modal.addEventListener("click",event=>{
+  if(event.target === modal) closeModal();
+});
+
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape") closeModal();
+});
+
+search.addEventListener("input",showCertificates);
+filter.addEventListener("change",showCertificates);
+
+showCertificates();
+</script>
+
+</body>
+</html>
